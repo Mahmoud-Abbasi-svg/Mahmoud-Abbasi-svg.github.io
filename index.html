@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Mahmoud Abbasi — machine learning for network measurement. Researcher at AIR Institute, Salamanca.">
+<title>Mahmoud Abbasi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+
+<style>
+  :root {
+    --ground:      #FBFBFC;
+    --surface:     #F3F4F7;
+    --ink:         #16181D;
+    --muted:       #5D6470;
+    --faint:       #8A909C;
+    --rule:        #E2E5EA;
+    --accent:      #1F5C8B;
+    --accent-soft: #E9F0F6;
+
+    --serif: "Newsreader", Georgia, "Times New Roman", serif;
+    --sans:  "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --mono:  "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+    --measure: 64ch;
+    --rail: 8.5rem;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground:      #0F1116;
+      --surface:     #171A21;
+      --ink:         #E7E9EE;
+      --muted:       #9BA3B0;
+      --faint:       #6E7684;
+      --rule:        #262B34;
+      --accent:      #7FB2D6;
+      --accent-soft: #17222C;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --ground:      #0F1116;
+    --surface:     #171A21;
+    --ink:         #E7E9EE;
+    --muted:       #9BA3B0;
+    --faint:       #6E7684;
+    --rule:        #262B34;
+    --accent:      #7FB2D6;
+    --accent-soft: #17222C;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.62;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 62rem;
+    margin: 0 auto;
+    padding: clamp(2.5rem, 6vw, 5rem) clamp(1.25rem, 5vw, 3rem) 5rem;
+  }
+
+  a { color: var(--accent); text-decoration: none; border-bottom: 1px solid color-mix(in srgb, var(--accent) 35%, transparent); }
+  a:hover { border-bottom-color: var(--accent); }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+  /* ---- masthead ---- */
+
+  .masthead { display: flex; flex-direction: column; gap: 1.1rem; }
+
+  h1 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(2.6rem, 7vw, 4rem);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    margin: 0;
+    text-wrap: balance;
+  }
+
+  .standfirst {
+    font-family: var(--serif);
+    font-size: clamp(1.15rem, 2.4vw, 1.4rem);
+    line-height: 1.5;
+    color: var(--muted);
+    max-width: 44ch;
+    margin: 0;
+  }
+
+  .affil {
+    font-family: var(--mono);
+    font-size: 0.775rem;
+    letter-spacing: 0.04em;
+    color: var(--faint);
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  /* ---- the measurement strip: figures always carry their basis ---- */
+
+  .metrics {
+    margin-top: 2.25rem;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    padding: 1rem 0 0.9rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 2.75rem;
+    align-items: baseline;
+  }
+
+  .metric { display: flex; flex-direction: column; gap: 0.1rem; }
+
+  .metric b {
+    font-family: var(--mono);
+    font-variant-numeric: tabular-nums;
+    font-size: 1.3rem;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+  }
+
+  .metric span {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    color: var(--faint);
+  }
+
+  .basis {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--faint);
+    margin: 0.55rem 0 0;
+    flex-basis: 100%;
+  }
+
+  /* ---- sections on a labelled rail ---- */
+
+  section { margin-top: 3.5rem; }
+
+  @media (min-width: 60rem) {
+    section { display: grid; grid-template-columns: var(--rail) minmax(0, 1fr); gap: 2.5rem; }
+  }
+
+  h2 {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--faint);
+    margin: 0 0 1rem;
+    padding-top: 0.45rem;
+  }
+
+  @media (min-width: 60rem) {
+    h2 { margin: 0; text-align: right; }
+  }
+
+  .body { display: flex; flex-direction: column; gap: 1rem; align-items: stretch; }
+  .body p { margin: 0; max-width: var(--measure); }
+  .lead > p { margin-top: 0.6rem; }
+
+  h3 {
+    font-family: var(--serif);
+    font-size: 1.28rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+
+  /* ---- the lead project ---- */
+
+  .lead {
+    background: var(--accent-soft);
+    border-left: 2px solid var(--accent);
+    padding: 1.4rem 1.6rem;
+  }
+
+  .lead h3 { font-family: var(--mono); font-size: 0.95rem; font-weight: 500; letter-spacing: 0; }
+
+  .transcript {
+    margin-top: 1.1rem;
+    font-family: var(--mono);
+    font-size: 0.775rem;
+    line-height: 1.55;
+    color: var(--muted);
+    border-top: 1px dashed color-mix(in srgb, var(--accent) 30%, transparent);
+    padding-top: 0.9rem;
+    overflow-x: auto;
+  }
+
+  .transcript em { color: var(--ink); font-style: normal; font-weight: 500; }
+
+  /* ---- repo list ---- */
+
+  .repos { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+  .repos li { padding: 0.7rem 0; border-top: 1px solid var(--rule); max-width: var(--measure); }
+  .repos li:first-child { border-top: none; padding-top: 0; }
+  .repos code { font-family: var(--mono); font-size: 0.855rem; }
+  .repos p { margin: 0.15rem 0 0; font-size: 0.9rem; color: var(--muted); }
+
+  /* ---- publications ---- */
+
+  .pubs { list-style: none; margin: 0; padding: 0; }
+
+  .pub {
+    display: grid;
+    grid-template-columns: 3.1rem minmax(0, 1fr);
+    gap: 0 0.9rem;
+    padding: 0.85rem 0;
+    border-top: 1px solid var(--rule);
+    max-width: var(--measure);
+  }
+
+  .pub:first-child { border-top: none; padding-top: 0; }
+
+  .yr {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--faint);
+    padding-top: 0.24rem;
+  }
+
+  .pub .t { font-family: var(--serif); font-size: 1.06rem; line-height: 1.38; }
+  .pub .a { font-size: 0.84rem; color: var(--muted); margin-top: 0.2rem; }
+  .pub .a b { font-weight: 600; color: var(--ink); }
+  .pub .v { font-size: 0.84rem; color: var(--faint); font-style: italic; }
+
+  .subhead {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--faint);
+    margin: 2.25rem 0 0.9rem;
+  }
+
+  /* ---- experience ---- */
+
+  .roles { list-style: none; margin: 0; padding: 0; }
+
+  .role {
+    display: grid;
+    grid-template-columns: 8.5rem minmax(0, 1fr);
+    gap: 0 0.9rem;
+    padding: 0.8rem 0;
+    border-top: 1px solid var(--rule);
+    max-width: var(--measure);
+  }
+
+  .role:first-child { border-top: none; padding-top: 0; }
+
+  .when {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--faint);
+    padding-top: 0.2rem;
+  }
+
+  .role .what { font-weight: 500; }
+  .role .where { font-size: 0.88rem; color: var(--muted); }
+
+  @media (max-width: 34rem) {
+    .pub, .role { grid-template-columns: 1fr; gap: 0.25rem; }
+    .metrics { gap: 0 1.75rem; }
+  }
+
+  /* ---- contact ---- */
+
+  .contact { display: flex; flex-wrap: wrap; gap: 0.5rem 1.75rem; font-family: var(--mono); font-size: 0.85rem; }
+
+  footer {
+    margin-top: 4.5rem;
+    padding-top: 1.1rem;
+    border-top: 1px solid var(--rule);
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--faint);
+  }
+</style>
+<style>
+  html { color-scheme: light dark; }
+  body { margin: 0; }
+  img { max-width: 100%; }
+</style>
+</head>
+<body>
+
+
+<div class="page">
+
+  <header class="masthead">
+    <p class="affil">AIR Institute · Salamanca</p>
+    <h1>Mahmoud Abbasi</h1>
+    <p class="standfirst">Machine learning for network measurement — and building systems that report the limits of what they can actually see.</p>
+
+    <div class="metrics">
+      <div class="metric"><b>1,901</b><span>Citations</span></div>
+      <div class="metric"><b>17</b><span>h-index</span></div>
+      <div class="metric"><b>21</b><span>i10-index</span></div>
+      <div class="metric"><b>9 / 13</b><span>First author</span></div>
+      <p class="basis">Google Scholar, July 2026. A figure without its date is a claim without a basis.</p>
+    </div>
+  </header>
+
+  <section>
+    <h2>Research</h2>
+    <div class="body">
+      <p>I work on machine learning for network traffic monitoring and analysis, and on secure, scalable IoT — the two halves of a doctorate completed at the University of Salamanca under Juan M. Corchado and Javier Prieto, within the EU Horizon 2020 <b>IoTalentum</b> training network.</p>
+      <p>On the monitoring side: knowledge distillation, ensemble methods and self-supervised representation learning for traffic classification and anomaly detection. On the systems side: two consensus protocols designed for devices that cannot afford proof of work — <i>Proof-of-Resource</i> and an aging-based proof of stake.</p>
+      <p>More recently I have been working on language models as agents over live measurement, and on neuro-symbolic architectures for intent-based networking, where a symbolic layer constrains what the model is permitted to assert.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Software</h2>
+    <div class="body">
+
+      <div class="lead">
+        <h3>agentic-observability</h3>
+        <p>A network monitor that reports the limits of its own instrument. Before it will call a change real, it measures that path's noise floor from the path's own history and asks whether a change of that size could have been seen at all — so <i>“nothing happened”</i> is never returned when the truth is <i>“I could not have observed it.”</i> Unmeasured time is never rendered as healthy time.</p>
+        <p>Verification lives in code rather than in the prompt: every claim the model makes is checked against the same statistics the monitor alerts on, and the check is appended to the answer instead of replacing it, so disagreement stays visible.</p>
+
+        <div class="transcript">10.50.16.1/rtt_avg_ms &mdash; could I detect a 10% change?<br>
+        instrument floor : steps of 0.1 on a median of 2 &rarr; nothing below 5.0% is expressible<br>
+        statistical floor: 75% at 80% power<br>
+        binding limit&nbsp;&nbsp;&nbsp;: STATISTICS, at 75.0%<br>
+        <em>VERDICT: NO. A “no change” result here would mean “invisible”, NOT “nothing happened”.</em></div>
+      </div>
+
+      <ul class="repos">
+        <li><code>confidence-gated-iot-ids</code><p>Intrusion detection that abstains rather than guessing when its confidence does not support a verdict.</p></li>
+        <li><code>distance-novelty-iot-ids</code><p>Distance-based novelty detection for traffic that does not resemble anything in training.</p></li>
+        <li><code>rafa-federated-energy</code><p>Federated learning over distributed energy data, without centralising it.</p></li>
+        <li><code>Industrial-data-monetization</code><p>Solidity implementation of an industrial IoT data trading system — the mechanism behind the <i>Internet of Things</i> paper below.</p></li>
+      </ul>
+
+      <p><a href="https://github.com/Mahmoud-Abbasi-svg">All repositories on GitHub →</a></p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Publications</h2>
+    <div class="body">
+
+      <p class="subhead">Journal articles</p>
+      <ul class="pubs">
+        <li class="pub"><span class="yr">2026</span><span><span class="t">Autoencoding-based self-supervised learning for enhanced representation of network traffic patterns</span><span class="a"><b>M. Abbasi</b>, A. Shahraki, M. Plaza-Hernández, J. Prieto, J. M. Corchado</span><span class="v">IEEE Open Journal of the Communications Society — accepted</span></span></li>
+        <li class="pub"><span class="yr">2025</span><span><span class="t">Class imbalance in network traffic classification: an adaptive weight ensemble-of-ensemble learning method</span><span class="a"><b>M. Abbasi</b>, S. López Flórez, A. Shahraki, A. Taherkordi, J. Prieto, J. M. Corchado</span><span class="v">IEEE Access 13, 26171–26192</span></span></li>
+        <li class="pub"><span class="yr">2024</span><span><span class="t">Unleashing the potential of knowledge distillation for IoT traffic classification</span><span class="a"><b>M. Abbasi</b>, A. Shahraki, J. Prieto, A. González Arrieta, J. M. Corchado</span><span class="v">IEEE Transactions on Machine Learning in Communications and Networking</span></span></li>
+        <li class="pub"><span class="yr">2024</span><span><span class="t">Proof-of-resource: a resource-efficient consensus mechanism for IoT devices in blockchain networks</span><span class="a"><b>M. Abbasi</b>, J. Prieto, M. Plaza-Hernández, J. M. Corchado</span><span class="v">EAI Endorsed Transactions on Internet of Things 10</span></span></li>
+        <li class="pub"><span class="yr">2023</span><span><span class="t">Industrial data monetization: a blockchain-based industrial IoT data trading system</span><span class="a"><b>M. Abbasi</b>, J. Prieto, A. Shahraki, J. M. Corchado</span><span class="v">Internet of Things, Elsevier</span></span></li>
+        <li class="pub"><span class="yr">2022</span><span><span class="t">Security in the Internet of Things application layer: requirements, threats and solutions</span><span class="a"><b>M. Abbasi</b>, M. Plaza-Hernández, J. Prieto, J. M. Corchado</span><span class="v">IEEE Access 10, 97197–97216</span></span></li>
+        <li class="pub"><span class="yr">2022</span><span><span class="t">A comparative study on online machine learning techniques for network traffic streams analysis</span><span class="a">A. Shahraki, <b>M. Abbasi</b>, A. Taherkordi, A. D. Jurcut</span><span class="v">Computer Networks, Elsevier</span></span></li>
+        <li class="pub"><span class="yr">2021</span><span><span class="t">Active learning for network traffic classification: a technical study</span><span class="a">A. Shahraki, <b>M. Abbasi</b>, A. Taherkordi, A. D. Jurcut</span><span class="v">IEEE Transactions on Cognitive Communications and Networking</span></span></li>
+        <li class="pub"><span class="yr">2021</span><span><span class="t">Deep learning for network traffic monitoring and analysis (NTMA): a survey</span><span class="a"><b>M. Abbasi</b>, A. Shahraki, A. Taherkordi</span><span class="v">Computer Communications, Elsevier</span></span></li>
+        <li class="pub"><span class="yr">2021</span><span><span class="t">Deep reinforcement learning for QoS provisioning at the MAC layer: a survey</span><span class="a">A. Shahraki, <b>M. Abbasi</b>, and colleagues</span><span class="v">Engineering Applications of Artificial Intelligence</span></span></li>
+        <li class="pub"><span class="yr">2020</span><span><span class="t">Boosting algorithms for network intrusion detection: Real, Gentle and Modest AdaBoost compared</span><span class="a">A. Shahraki, <b>M. Abbasi</b>, Ø. Haugen</span><span class="v">Engineering Applications of Artificial Intelligence</span></span></li>
+      </ul>
+
+      <p class="subhead">Conference papers</p>
+      <ul class="pubs">
+        <li class="pub"><span class="yr">2025</span><span><span class="t">Autoencoding-based self-supervised learning for enhanced representation of network traffic patterns</span><span class="a"><b>M. Abbasi</b>, J. Prieto, J. M. Corchado</span><span class="v">IEEE ICMLCN</span></span></li>
+        <li class="pub"><span class="yr">2023</span><span><span class="t">A novel aging-based proof of stake consensus mechanism</span><span class="a"><b>M. Abbasi</b>, J. Prieto, M. Plaza-Hernández, J. M. Corchado</span><span class="v">Sustainable Smart Cities and Territories</span></span></li>
+        <li class="pub"><span class="yr">2022</span><span><span class="t">FLITC: a novel federated learning-based method for IoT traffic classification</span><span class="a"><b>M. Abbasi</b>, A. Shahraki, A. Taherkordi</span><span class="v">IEEE SMARTCOMP</span></span></li>
+        <li class="pub"><span class="yr">2021</span><span><span class="t">Internet traffic classification using an ensemble of deep convolutional neural networks</span><span class="a">A. Shahraki, <b>M. Abbasi</b>, A. Taherkordi, M. Kaosar</span><span class="v">ACM SIGCOMM — FlexNets</span></span></li>
+      </ul>
+
+      <p><a href="https://scholar.google.com/citations?user=ypjOtOgAAAAJ">Full list on Google Scholar →</a></p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Positions</h2>
+    <div class="body">
+      <ul class="roles">
+        <li class="role"><span class="when">2026 —</span><span><span class="what">Researcher</span><br><span class="where">AIR Institute, Salamanca</span></span></li>
+        <li class="role"><span class="when">2022 – 2025</span><span><span class="what">Marie Skłodowska-Curie Fellow</span><br><span class="where">IoTalentum, University of Salamanca — EU H2020, grant 953442</span></span></li>
+        <li class="role"><span class="when">2024 – 2025</span><span><span class="what">Secondment — energy market modelling</span><br><span class="where">Energia Simples, Portugal</span></span></li>
+        <li class="role"><span class="when">2024</span><span><span class="what">Secondment — blockchain for peer-to-peer energy trading</span><br><span class="where">Instituto Superior de Engenharia do Porto</span></span></li>
+        <li class="role"><span class="when">2022 – 2023</span><span><span class="what">Secondment — proof-of-work trade-offs</span><br><span class="where">Digitel TS, Valladolid</span></span></li>
+      </ul>
+      <p>Reviewer for <i>IEEE Communications Letters</i> and <i>Engineering Applications of Artificial Intelligence</i>.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Contact</h2>
+    <div class="body">
+      <div class="contact">
+        <a href="mailto:mahmoud.abbasi@ieee.org">mahmoud.abbasi@ieee.org</a>
+        <a href="https://scholar.google.com/citations?user=ypjOtOgAAAAJ">Google Scholar</a>
+        <a href="https://github.com/Mahmoud-Abbasi-svg">GitHub</a>
+        <a href="https://www.linkedin.com/in/mahmoud-abbasi-7151a6a7/">LinkedIn</a>
+        <a href="https://orcid.org/0000-0002-1886-8284">ORCID</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>Salamanca, Spain</footer>
+
+</div>
+
+</body>
+</html>
